@@ -1,43 +1,7 @@
 <app-panel-top></app-panel-top>
 
-<button routerLink="/landing">Powrót</button>
-
-<style>
-    th {
-        border: 1px solid black;
-    }
-    
-    td {
-        border: 1px solid black;
-        padding: 0;
-        height: 500px;
-    }
-    
-    .buy {
-        height: 28px;
-        width: 100%;
-        border-radius: 0;
-        border-left: none;
-        border-right: none;
-        border-top: 1px solid silver;
-        border-bottom: 1px solid silver;
-        transition: .5s;
-        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    }
-    
-    .buy:hover {
-        background-color: navy;
-        color: white;
-        border: none;
-    }
-    
-    ol {
-        padding: 0;
-    }
-</style>
-
 <div class="products">
-    <table style="margin:0 auto;">
+    <table style="margin:0 auto;" id="productsTable">
         <thead *ngIf="this.mainService.products">
             <tr>
                 <th>obrazek</th>
@@ -48,7 +12,7 @@
             <ng-container *ngFor="let product of this.mainService.products?.productsTable">
                 <tr style="background-color: whitesmoke; border: 1px solid black;">
                     <td style="width: 30%;">
-                        <img src="{{product.thumbnail}}" alt="" style="width: 100%; height: 100%;">
+                        <img src="{{product.thumbnail}}" alt="">
                     </td>
                     <td style="width: 70%;">
                         <div>
@@ -65,8 +29,8 @@
                                     <h2><b>Cena: {{product.price}} zł</b></h2>
                                 </ol>
                             </ul>
-                            <div style="position: relative; top: 1px;">
-                                <button class='buy'>Do koszyka</button>
+                            <div>
+                                <button class="buy" (click)="addToCart(product)">Do koszyka</button>
                             </div>
                         </div>
                     </td>

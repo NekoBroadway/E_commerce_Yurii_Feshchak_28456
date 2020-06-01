@@ -1,0 +1,72 @@
+<app-panel-top></app-panel-top>
+<div class="products">
+    <table style="margin:0 auto;" id="cartTable">
+        <thead *ngIf="this.mainService.products">
+            <tr>
+                <th>obrazek</th>
+                <th>dane</th>
+            </tr>
+        </thead>
+        <tbody>
+            <ng-container *ngFor="let object of this.mainService.cart">
+                <tr style="background-color: whitesmoke; border: 1px solid black;">
+                    <td style="width: 30%;">
+                        <img src="{{object.product.thumbnail}}" alt="">
+                    </td>
+                    <td style="width: 70%;">
+                        <div>
+                            <ul style="padding: 0 40px 0 40px;">
+                                <ol>
+                                    <h1><b>{{object.product.title}}</b></h1>
+                                </ol>
+                                <ol>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maiores tempora, reiciendis alias ipsum possimus quo earum laborum necessitatibus obcaecati deserunt commodi perferendis optio sapiente adipisci quos esse rerum
+                                        maxime aspernatur eos quaerat, facere iure ipsa libero impedit? Ullam iusto illo quis quasi nihil, nobis repellendus voluptate fuga, commodi illum repellat.</p>
+                                </ol>
+                                <ol>Kategoria: {{object.product.category}}</ol>
+                                <ol>
+                                    <h2><b>Cena: {{object.product.price}} zł</b></h2>
+                                </ol>
+                            </ul>
+                        </div>
+                    </td>
+                </tr>
+            </ng-container>
+        </tbody>
+    </table>
+    <div class="divPayments">
+        <div class="payment">
+            <div id="paypal"></div>
+            <form action="http://www.jakubadamus.cba.pl/paypal.php" method="get" #paymentForm>
+                <td style="display: block; width: 50%; height: 100%; float: left;">
+                    <ul>
+                        <li>
+                            <input type="text" #firstName name="firstName" id="" placeholder="Imie">
+                        </li>
+                        <li>
+                            <input type="text" #lastName name="lastName" id="" placeholder="Nazwisko">
+                        </li>
+                        <li>
+                            <input type="text" #email name="email" id="" placeholder="Email">
+                        </li>
+                        <li>
+                            <input type="text" name="phone" id="" placeholder="Telefon">
+                        </li>
+                    </ul>
+                </td>
+                <ng-container *ngFor="let object of this.mainService.cart">
+                    <input type="hidden" name="products[]" value="{{ object | json }}">
+                </ng-container>
+                <td style="display: block; width: 50%; height: 100%; float: right; margin: 0 auto;">
+                    <div class="summary">
+                        <p>Do zapłaty: {{getCartPrice()}} zł</p>
+                    </div>
+                    <label for="">Akceptuję regulamin:<input #regulamin type="checkbox" name="aggrement" id="" (change)="0"></label>
+                </td>
+                <div>
+                    <button class="buy" [disabled]="!regulamin.checked" (click)="paymentForm.submit()">Kup</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

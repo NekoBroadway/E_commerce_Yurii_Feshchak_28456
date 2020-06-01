@@ -12,8 +12,22 @@ export class ProductsComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  getProducts(){
+  getProducts() {
     this.mainService.getProducts(this.mainService.productsRequest);
+  }
+
+  addToCart(product) {
+    this.mainService.cart.push({ product });
+    console.log('Dodano do koszyka produkt:');
+    console.log(product);
+  }
+
+  getCartQuantity() {
+    let quantity = 0;
+    for (const product of this.mainService.cart) {
+      quantity += 1;
+    }
+    return quantity;
   }
 
 }

@@ -1,10 +1,21 @@
-<div>
-    <div style="display: flex;flex-direction: row;">
-        <img src="https://via.placeholder.com/100" alt="">
-        <h2>Sklep z softłerem</h2>
-    </div>
-    <div style="display: flex; justify-content: center;">
-        <input type="text" [(ngModel)]="this.mainService.productsRequest.name">
-        <button (click)="this.mainService.getProducts(this.mainService.productsRequest)" routerLink="/products">Szukaj Produktu</button>
+<div style="display: flex;">
+    <div id="head">
+        <div id="brand">
+            <a style="text-decoration: none; color: black" routerLink="/landing">
+                <h1 style="padding: 0 10px 0 10px;">[̲̅M][̲̅y][̲̅S][̲̅h][̲̅o][̲̅p]</h1>
+            </a>
+        </div>
+        <div id="head-search">
+            <input type="text " [(ngModel)]="this.mainService.productsRequest.name ">
+            <button (click)="this.mainService.getProducts(this.mainService.productsRequest) " routerLink="/products">Szukaj Produktu</button>
+        </div>
+        <div id="head-panel">
+            <div>
+                <button routerLink="/cart" id="cartBtn">Koszyk ({{getCartQuantity()}})</button>
+            </div>
+            <div>
+                <button routerLink="/dashboard" id="dashboardBtn">Dashboard</button>
+            </div>
+        </div>
     </div>
 </div>
